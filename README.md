@@ -15,3 +15,10 @@ rm -rf ~/miniconda3/miniconda.sh
 ~/miniconda3/bin/conda init bash
 ~/miniconda3/bin/conda init zsh
 ```
+
+### Environment
+
+```bash
+conda create -n demo -y
+conda activate demo
+```
