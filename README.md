@@ -22,3 +22,10 @@ rm -rf ~/miniconda3/miniconda.sh
 conda create -n demo -y
 conda activate demo
 ```
+
+### Dependencies
+
+```bash
+conda install -n demo -c conda-forge gradio -y
+conda install -n demo -c pytorch pytorch torchvision transformers -y
+```
