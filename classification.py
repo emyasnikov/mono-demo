@@ -2,6 +2,7 @@ import os.path
 import torch
 import torchvision
 import urllib.request
+from torchvision import transforms
 
 LABELS_URL = 'https://storage.googleapis.com/bit_models/ilsvrc2012_wordnet_lemmas.txt'
 
@@ -22,3 +23,9 @@ def generate(image):
 
     model = torchvision.models.resnet50(pretrained=True).to(device)
     model.eval()
+
+    transform = transforms.Compose([
+        transforms.Resize(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])
