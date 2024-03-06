@@ -1,5 +1,6 @@
 import captioning
 import classification
+import detection
 import gradio as gr
 import json
 
@@ -7,6 +8,7 @@ def predict(input):
     results = {
         'captioning': captioning.generate(input),
         'classification': classification.generate(input),
+        'detection': detection.generate(input),
     }
 
     return json.dumps(results, indent=2)
