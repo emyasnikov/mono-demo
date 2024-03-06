@@ -14,6 +14,7 @@ def predict(input):
     return json.dumps(results, indent=2)
 
 demo = gr.Interface(
+    allow_flagging=False,
     css='footer {visibility: hidden}',
     fn=predict,
     inputs=gr.Image(type='pil'),
