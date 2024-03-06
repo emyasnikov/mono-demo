@@ -1,10 +1,10 @@
-import caption
+import captioning
 import gradio as gr
 import json
 
 def predict(input):
     results = {
-        'caption': caption.generate(input),
+        'captioning': captioning.generate(input),
     }
 
     return json.dumps(results, indent=2)
