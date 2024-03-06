@@ -1,7 +1,8 @@
+import caption
 import gradio as gr
 
-def predict():
-    return "test"
+def predict(input):
+    return caption.generate(input)
 
 demo = gr.Interface(
     css='footer {visibility: hidden}',
