@@ -5,7 +5,8 @@
 ### Python
 
 ```bash
-sudo apt install nginx tmux -y
+sudo apt update
+sudo apt install libgl1-mesa-glx nginx tmux -y
 sudo apt install python3-{pip,venv} -y
 ```
 
