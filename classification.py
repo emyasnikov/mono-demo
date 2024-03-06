@@ -1,0 +1,2 @@
+def generate(image):
+    pass
