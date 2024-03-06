@@ -6,7 +6,7 @@ def predict():
 demo = gr.Interface(
     fn=predict,
     inputs=gr.Image(),
-    outputs=gr.Textbox(label="Preview", lines=10),
+    outputs=gr.Textbox(label='Preview', lines=10),
 )
 
-demo.launch()
+demo.launch(root_path='/demo')
