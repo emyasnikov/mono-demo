@@ -1,8 +1,13 @@
 import caption
 import gradio as gr
+import json
 
 def predict(input):
-    return caption.generate(input)
+    results = {
+        'caption': caption.generate(input),
+    }
+
+    return json.dumps(results, indent=2)
 
 demo = gr.Interface(
     css='footer {visibility: hidden}',
