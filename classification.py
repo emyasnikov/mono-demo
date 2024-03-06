@@ -13,3 +13,5 @@ def download_labels():
 
 def generate(image):
     labels = download_labels()
+
+    label_map = dict(enumerate(open(labels)))
