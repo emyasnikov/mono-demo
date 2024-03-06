@@ -5,7 +5,7 @@
 ### Python
 
 ```bash
-sudo apt install nginx -y
+sudo apt install nginx tmux -y
 sudo apt install python3-{pip,venv} -y
 ```
 
@@ -30,4 +30,10 @@ sudo cp demo.conf /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/demo.conf /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl restart nginx
+```
+
+### Tmux
+
+```bash
+tmux new -s demo
 ```
