@@ -5,7 +5,7 @@
 ### Python
 
 ```bash
-sudo apt install python3-pip
+sudo apt install python3-{pip,venv} -y
 ```
 
 ### Environment
@@ -13,4 +13,11 @@ sudo apt install python3-pip
 ```bash
 python3 -m venv ~/.demo
 source ~/.demo/bin/activate
+```
+
+### Dependencies
+
+```bash
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install transformers
 ```
