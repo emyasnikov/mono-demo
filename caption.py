@@ -6,9 +6,15 @@ models = [
     'ydshieh/vit-gpt2-coco-en',
 ]
 
-def generate(model_name=None):
+def generate(image, model_name=None):
     model = models[model_name] if not model_name == None else models[0]
 
     model_raw = VisionEncoderDecoderModel.from_pretrained(model)
     tokenizer = GPT2TokenizerFast.from_pretrained(model)
     image_processor = ViTImageProcessor.from_pretrained(model)
+
+    preprocessed = image_processor(images=image, return_tersors='pt')
+    output = model_raw.generate(**preprocessed, max_length=64)
+    caption = tokenizer.batch_decode(output, skip_special_tokens=True)[0]
+
+    return caption
