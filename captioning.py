@@ -10,7 +10,7 @@ models = [
 ]
 
 def generate(image, greedy=True, model_name=None):
-    model = models[model_name] if not model_name == None else models[0]
+    model = models[model_name] if not model_name == None else models[1]
 
     model_raw = VisionEncoderDecoderModel.from_pretrained(model).to(device)
     tokenizer = GPT2TokenizerFast.from_pretrained(model)
