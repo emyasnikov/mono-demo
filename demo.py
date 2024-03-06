@@ -4,6 +4,7 @@ def predict():
     return "test"
 
 demo = gr.Interface(
+    css='footer {visibility: hidden}',
     fn=predict,
     inputs=gr.Image(),
     outputs=gr.Textbox(label='Preview', lines=10),
