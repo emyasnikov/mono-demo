@@ -37,3 +37,11 @@ sudo systemctl restart nginx
 ```bash
 tmux new -s demo
 ```
+
+## Run
+
+```bash
+tmux attach -t demo
+source ~/.demo/bin/activate
+python demo.py
+```
