@@ -14,7 +14,7 @@ def predict(input):
 demo = gr.Interface(
     css='footer {visibility: hidden}',
     fn=predict,
-    inputs=gr.Image(),
+    inputs=gr.Image(type='pil'),
     outputs=gr.Textbox(label='Preview', lines=10),
     title='Image Recognition Demo',
 )
