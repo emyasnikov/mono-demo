@@ -20,8 +20,8 @@ source ~/.venv/demo/bin/activate
 #### Dependencies
 
 ```bash
+pip install gradio transformers
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-pip install transformers
 ```
 
 ### Nginx
