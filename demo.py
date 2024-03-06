@@ -8,6 +8,7 @@ demo = gr.Interface(
     fn=predict,
     inputs=gr.Image(),
     outputs=gr.Textbox(label='Preview', lines=10),
+    title='Image Recognition Demo',
 )
 
 if __name__ == "__main__":
