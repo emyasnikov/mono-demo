@@ -1,2 +1,4 @@
+import torch
+
 def generate(image):
-    pass
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
