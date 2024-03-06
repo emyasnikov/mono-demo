@@ -12,8 +12,9 @@ sudo apt install python3-{pip,venv} -y
 #### Environment
 
 ```bash
-python3 -m venv ~/.demo
-source ~/.demo/bin/activate
+mkdir ~/.venv
+python3 -m venv ~/.venv/demo
+source ~/.venv/demo/bin/activate
 ```
 
 #### Dependencies
@@ -42,6 +43,6 @@ tmux new -s demo
 
 ```bash
 tmux attach -t demo
-source ~/.demo/bin/activate
+source ~/.venv/demo/bin/activate
 python demo.py
 ```
