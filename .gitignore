@@ -1,2 +1,4 @@
 __pycache__
 flagged
+labels.txt
+*.pt
