@@ -29,3 +29,14 @@ def generate(image):
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
+
+    logits = model(transform(image).unsqueeze(0)).to(device)
+    probs = torch.nn.Softmax(dim=-1)(logits)
+    sorted_probs = torch.argsort(probs, dim=-1, descending=True)
+
+    output = {}
+
+    for prob in sorted_probs[0, :10]:
+        output[label_map[prob.item()].strip()] = "{:.2f}%".format(probs[0, prob.item()].item() * 100)
+
+    return output
