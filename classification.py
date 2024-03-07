@@ -33,9 +33,14 @@ def generate(image):
     probs = torch.nn.Softmax(dim=-1)(logits)
     sorted_probs = torch.argsort(probs, dim=-1, descending=True)
 
-    output = {}
+    output = []
 
     for prob in sorted_probs[0, :10]:
-        output[label_map[prob.item()].strip()] = "{:.2f}%".format(probs[0, prob.item()].item() * 100)
+        entry = {
+            'label': label_map[prob.item()].strip(),
+            'probability': '{:.2f}%'.format(probs[0, prob.item()].item() * 100),
+        }
+
+        output.append(entry)
 
     return output
