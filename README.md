@@ -13,6 +13,7 @@ sudo apt install python3-{pip,venv} -y
 #### Environment
 
 ```bash
+cp .env.example .env
 mkdir ~/.venv
 python3 -m venv ~/.venv/demo
 source ~/.venv/demo/bin/activate
@@ -21,7 +22,7 @@ source ~/.venv/demo/bin/activate
 #### Dependencies
 
 ```bash
-pip install deepl gradio opencv-python transformers
+pip install deepl gradio opencv-python python-dotenv transformers
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ```
 

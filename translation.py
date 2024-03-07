@@ -1,7 +1,8 @@
+import config
 import deepl
 
-auth_key = ''
-target_lang = 'DE'
+auth_key = config.get('DEEPL_AUTH_KEY')
+target_lang = config.get('DEEPL_TARGET_LANG')
 translator = deepl.Translator(auth_key)
 
 def translate(input):
