@@ -38,6 +38,7 @@ def generate(image):
 
     for prob in sorted_probs[0, :10]:
         label = label_map[prob.item()].strip()
+        label = label.replace(',', ', ').replace('_', ' ')
 
         entry = {
             'label': translation.translate(label, max_length=8),
