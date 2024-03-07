@@ -1,5 +1,6 @@
 import config
 import torch
+import translation
 from transformers import GPT2TokenizerFast, VisionEncoderDecoderModel, ViTImageProcessor
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -20,4 +21,4 @@ def generate(image, greedy=True, model_name=None):
 
     caption = tokenizer.batch_decode(output, skip_special_tokens=True)[0]
 
-    return caption
+    return translation.translate(caption, max_length=64)
