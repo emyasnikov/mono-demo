@@ -7,12 +7,20 @@ def generate(image):
 
     objects = model(image).pandas().xyxy[0].to_dict(orient='records')
 
-    output = {}
+    count = {}
 
     for obj in objects:
-        if obj['name'] not in output:
-            output[obj['name']] = 1
+        if obj['name'] not in count:
+            count[obj['name']] = 1
         else:
-            output[obj['name']] += 1
+            count[obj['name']] += 1
+
+    output = []
+
+    for key, value in count.items():
+        output.append({
+            'label': key,
+            'count': value,
+        })
 
     return output
