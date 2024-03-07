@@ -4,7 +4,6 @@ import config
 import detection
 import gradio as gr
 import json
-import translation
 
 def predict(input):
     results = {
@@ -13,9 +12,7 @@ def predict(input):
         'detection': detection.generate(input),
     }
 
-    output = json.dumps(results, indent=2)
-
-    return translation.translate(output)
+    return json.dumps(results, indent=2)
 
 app = gr.Interface(
     allow_flagging=False,
