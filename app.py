@@ -1,5 +1,6 @@
 import captioning
 import classification
+import config
 import detection
 import gradio as gr
 import json
@@ -22,7 +23,7 @@ app = gr.Interface(
     fn=predict,
     inputs=gr.Image(type='pil'),
     outputs=gr.Textbox(label='Preview', lines=10),
-    title='Image Recognition Demo',
+    title=config.get('APP_TITLE'),
 )
 
 if __name__ == "__main__":
