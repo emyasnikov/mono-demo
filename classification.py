@@ -14,7 +14,7 @@ transform = transforms.Compose([
 ])
 
 def download_labels():
-    filename = 'labels.txt'
+    filename = config.get('LABELS_FILE')
 
     if not os.path.exists(filename):
         urllib.request.urlretrieve(config.get('LABELS_URL'), filename)
