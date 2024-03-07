@@ -41,7 +41,7 @@ def generate(image):
         label = label.replace(',', ', ').replace('_', ' ')
 
         entry = {
-            'label': translation.translate(label, max_length=8),
+            'label': translation.translate(label),
             'probability': '{:.2f}%'.format(probs[0, prob.item()].item() * 100),
         }
 

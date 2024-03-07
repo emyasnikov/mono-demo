@@ -21,4 +21,4 @@ def generate(image, greedy=True, model_name=None):
 
     caption = tokenizer.batch_decode(output, skip_special_tokens=True)[0]
 
-    return translation.translate(caption, max_length=64)
+    return translation.translate(caption)
