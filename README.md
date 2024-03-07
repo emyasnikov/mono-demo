@@ -21,7 +21,7 @@ source ~/.venv/demo/bin/activate
 #### Dependencies
 
 ```bash
-pip install gradio opencv-python transformers
+pip install deepl gradio opencv-python transformers
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ```
 

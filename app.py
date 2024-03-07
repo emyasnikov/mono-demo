@@ -3,6 +3,7 @@ import classification
 import detection
 import gradio as gr
 import json
+import translation
 
 def predict(input):
     results = {
@@ -11,7 +12,9 @@ def predict(input):
         'detection': detection.generate(input),
     }
 
-    return json.dumps(results, indent=2)
+    output = json.dumps(results, indent=2)
+
+    return translation.translate(output)
 
 app = gr.Interface(
     allow_flagging=False,
