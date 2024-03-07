@@ -11,6 +11,6 @@ def translate(input, max_length=512):
 
         return translator.translate_text(input, target_lang=target_lang)
 
-    translator = transformers.pipeline('translation_en_to_de', max_length=max_length)
+    translator = transformers.pipeline(config.get('TRANSLATION_MODEL'), max_length=max_length)
 
     return translator(input)[0]['translation_text']
