@@ -2,6 +2,7 @@ import config
 import os.path
 import torch
 import torchvision
+import translation
 import urllib.request
 from torchvision import transforms
 
@@ -36,8 +37,10 @@ def generate(image):
     output = []
 
     for prob in sorted_probs[0, :10]:
+        label = label_map[prob.item()].strip()
+
         entry = {
-            'label': label_map[prob.item()].strip(),
+            'label': translation.translate(label, max_length=8),
             'probability': '{:.2f}%'.format(probs[0, prob.item()].item() * 100),
         }
 
