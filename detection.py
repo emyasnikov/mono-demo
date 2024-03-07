@@ -1,4 +1,5 @@
 import torch
+import translation
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -19,7 +20,7 @@ def generate(image):
 
     for key, value in count.items():
         output.append({
-            'label': key,
+            'label': translation.translate(key),
             'count': value,
         })
 
