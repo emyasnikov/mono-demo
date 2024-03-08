@@ -28,9 +28,7 @@ demo_analyze = gr.Interface(
     css='footer {visibility: hidden}',
     fn=predict_analyze,
     inputs=[
-        gr.Dropdown(label='Select', choices=[
-            'Captioning', 'Classification', 'Detection',
-        ], value='Captioning'),
+        gr.Dropdown(label='Select', choices=['Captioning', 'Classification', 'Detection'], value='Captioning'),
         gr.Image(type='pil', label='Image'),
     ],
     outputs=gr.Textbox(label='Output', lines=10),
@@ -42,7 +40,7 @@ demo_api = gr.Interface(
     css='footer {visibility: hidden}',
     fn=predict_api,
     inputs=gr.Image(type='pil', label='Image'),
-    outputs=gr.Textbox(label='Preview', lines=10),
+    outputs=gr.Textbox(label='Output', lines=10),
     title=config.get('APP_TITLE'),
 )
 
