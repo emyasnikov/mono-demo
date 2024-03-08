@@ -5,18 +5,15 @@ import detection
 import gradio as gr
 import json
 
-def predict_analyze(type, input):
-    output = None
 
-    if type == 'Captioning':
-        output = captioning.generate(input)
-    elif type == 'Classification':
-        output = classification.generate(input)
-    elif type == 'Detection':
-        output = detection.generate(input)
+def predict_captioning(input):
+    return captioning.generate(input)
 
-    return output
+def predict_classification(input):
+    return classification.generate(input)
 
+def predict_detection(input):
+    return detection.generate(input)
 
 def predict_api(input):
     results = {
@@ -27,21 +24,32 @@ def predict_api(input):
 
     return json.dumps(results, indent=2)
 
-demo_analyze = gr.Interface(
+demo_captioning = gr.Interface(
     allow_flagging=False,
-    css='footer {visibility: hidden}',
-    fn=predict_analyze,
-    inputs=[
-        gr.Dropdown(label='Select', choices=['Captioning', 'Classification', 'Detection'], value='Captioning'),
-        gr.Image(type='pil', label='Image'),
-    ],
+    fn=predict_captioning,
+    inputs=gr.Image(type='pil', label='Image'),
+    outputs=gr.Textbox(label='Output', lines=10),
+    title=config.get('APP_TITLE'),
+)
+
+demo_classification = gr.Interface(
+    allow_flagging=False,
+    fn=predict_classification,
+    inputs=gr.Image(type='pil', label='Image'),
+    outputs=gr.Textbox(label='Output', lines=10),
+    title=config.get('APP_TITLE'),
+)
+
+demo_detection = gr.Interface(
+    allow_flagging=False,
+    fn=predict_detection,
+    inputs=gr.Image(type='pil', label='Image'),
     outputs=gr.Textbox(label='Output', lines=10),
     title=config.get('APP_TITLE'),
 )
 
 demo_api = gr.Interface(
     allow_flagging=False,
-    css='footer {visibility: hidden}',
     fn=predict_api,
     inputs=gr.Image(type='pil', label='Image'),
     outputs=gr.Textbox(label='Output', lines=10),
@@ -49,12 +57,16 @@ demo_api = gr.Interface(
 )
 
 demo = gr.TabbedInterface([
-    demo_analyze,
+    demo_captioning,
+    demo_classification,
+    demo_detection,
     demo_api,
 ], [
-    'Analyze',
+    'Captioning',
+    'Classification',
+    'Detection',
     'API',
-])
+], css='footer {visibility: hidden}')
 
 if __name__ == "__main__":
     demo.queue().launch(root_path='/demo')
