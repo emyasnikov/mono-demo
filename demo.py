@@ -6,12 +6,16 @@ import gradio as gr
 import json
 
 def predict_analyze(type, input):
+    output = None
+
     if type == 'Captioning':
-        return captioning.generate(input)
+        output = captioning.generate(input)
     elif type == 'Classification':
-        return classification.generate(input)
+        output = classification.generate(input)
     elif type == 'Detection':
-        return detection.generate(input)
+        output = detection.generate(input)
+
+    return output
 
 
 def predict_api(input):
