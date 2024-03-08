@@ -18,7 +18,7 @@ def predict_detection(input):
 def predict_api(input):
     results = {
         'captioning': captioning.generate(input),
-        'classification': classification.generate(input),
+        'classification': classification.generate(input, api=True),
         'detection': detection.generate(input),
     }
 
@@ -36,7 +36,7 @@ demo_classification = gr.Interface(
     allow_flagging=False,
     fn=predict_classification,
     inputs=gr.Image(type='pil', label='Image'),
-    outputs=gr.Textbox(label='Output', lines=10),
+    outputs=gr.Label(label='Probability', num_top_classes=10),
     title=config.get('APP_TITLE'),
 )
 

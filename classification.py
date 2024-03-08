@@ -22,7 +22,7 @@ def download_labels():
 
     return filename
 
-def generate(image):
+def generate(image, api=False):
     labels = download_labels()
 
     label_map = dict(enumerate(open(labels)))
@@ -34,17 +34,20 @@ def generate(image):
     probs = torch.nn.Softmax(dim=-1)(logits)
     sorted_probs = torch.argsort(probs, dim=-1, descending=True)
 
-    output = []
+    output = [] if api else {}
 
     for prob in sorted_probs[0, :10]:
         label = label_map[prob.item()].strip()
         label = label.replace(',', ', ').replace('_', ' ')
 
-        entry = {
-            'label': translation.translate(label),
-            'probability': '{:.2f}%'.format(probs[0, prob.item()].item() * 100),
-        }
+        if api:
+            entry = {
+                'label': translation.translate(label),
+                'probability': '{:.2f}%'.format(probs[0, prob.item()].item() * 100),
+            }
 
-        output.append(entry)
+            output.append(entry)
+        else:
+            output[translation.translate(label)] = probs[0, prob.item()].item()
 
     return output
