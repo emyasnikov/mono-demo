@@ -19,7 +19,7 @@ def predict_api(input):
     results = {
         'captioning': captioning.generate(input),
         'classification': classification.generate(input, api=True),
-        'detection': detection.generate(input),
+        'detection': detection.generate(input, api=True),
     }
 
     return json.dumps(results, indent=2)
@@ -44,7 +44,7 @@ demo_detection = gr.Interface(
     allow_flagging=False,
     fn=predict_detection,
     inputs=gr.Image(type='pil', label='Image'),
-    outputs=gr.Textbox(label='Output', lines=10),
+    outputs=gr.Image(type='pil', label='Objects'),
     title=config.get('APP_TITLE'),
 )
 
