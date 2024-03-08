@@ -14,7 +14,7 @@ def predict(input):
 
     return json.dumps(results, indent=2)
 
-app = gr.Interface(
+demo = gr.Interface(
     allow_flagging=False,
     css='footer {visibility: hidden}',
     fn=predict,
@@ -24,4 +24,4 @@ app = gr.Interface(
 )
 
 if __name__ == "__main__":
-    app.queue().launch(root_path='/demo')
+    demo.queue().launch(root_path='/demo')

@@ -46,5 +46,5 @@ tmux new -s demo
 ```bash
 tmux attach -t demo
 source ~/.venv/demo/bin/activate
-python app.py
+python demo.py
 ```
