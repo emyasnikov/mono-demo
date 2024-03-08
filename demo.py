@@ -30,7 +30,7 @@ demo_analyze = gr.Interface(
     inputs=[
         gr.Dropdown(label='Select', choices=[
             'Captioning', 'Classification', 'Detection',
-        ]),
+        ], value='Captioning'),
         gr.Image(type='pil', label='Image'),
     ],
     outputs=gr.Textbox(label='Output', lines=10),
