@@ -1,12 +1,18 @@
-import torch
 import translation
 from PIL import Image
-
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+from ultralytics import YOLO
 
 def generate(image, type=None):
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True).to(device)
-    results = model(image)
+    model = YOLO('yolov8n')
+
+    results = model.predict(
+        source=image,
+        conf=0.25,
+        iou=0.45,
+        show_labels=True,
+        show_conf=True,
+        imgsz=640,
+    )
 
     if type == 'array' or type == 'json':
         objects = results.pandas().xyxy[0].to_dict(orient='records')
@@ -35,7 +41,8 @@ def generate(image, type=None):
 
         return output
 
-    image_array = results.render()[0]
-    pil_image = Image.fromarray(image_array)
+    for r in results:
+        image_array = r.plot()
+        pil_image = Image.fromarray(image_array[..., ::-1])
 
     return pil_image
