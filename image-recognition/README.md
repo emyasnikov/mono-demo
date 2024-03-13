@@ -22,7 +22,7 @@ source ~/.venv/demo/bin/activate
 #### Dependencies
 
 ```bash
-pip install deepl gradio opencv-python python-dotenv transformers
+pip install deepl gradio opencv-python python-dotenv transformers ultralytics
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ```
 
