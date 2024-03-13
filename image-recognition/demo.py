@@ -13,7 +13,7 @@ def predict_classification(input):
     return classification.generate(input)
 
 def predict_detection(input):
-    return detection.generate(input, type='array')
+    return detection.generate(input)
 
 def predict_api(input):
     results = {
@@ -44,12 +44,7 @@ demo_detection = gr.Interface(
     allow_flagging=False,
     fn=predict_detection,
     inputs=gr.Image(type='pil', label='Image'),
-    outputs=gr.Dataframe(
-        headers=['Label', 'Count'],
-        datatype=['str', 'number'],
-        type='array',
-        label='Output',
-    ),
+    outputs=gr.Image(type='pil', label='Output'),
     title=config.get('APP_TITLE'),
 )
 
