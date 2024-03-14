@@ -16,3 +16,9 @@ mkdir ~/.venv
 python3 -m venv ~/.venv/yolo
 source ~/.venv/yolo/bin/activate
 ```
+
+### Packages
+
+```bash
+pip install gradio ultralytics -y
+```
