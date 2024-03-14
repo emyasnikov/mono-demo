@@ -20,6 +20,7 @@ demo = gr.Interface(
         gr.Dropdown(
             choices=[
                 ('Detection', 'yolov8n.pt'),
+                ('Segmentation', 'yolov8n-seg.pt'),
             ],
             label='Model',
             value='yolov8n.pt',
