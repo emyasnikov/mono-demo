@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt update
-sudo apt install python3-{pip,venv} -y
+sudo apt install nginx python3-{pip,venv} -y
 ```
 
 ### Environment
@@ -21,4 +21,13 @@ source ~/.venv/yolo/bin/activate
 
 ```bash
 pip install gradio ultralytics -y
+```
+
+### Nginx
+
+```bash
+sudo cp yolo.conf /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/yolo.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
 ```
