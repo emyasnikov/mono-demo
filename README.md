@@ -20,7 +20,7 @@ source ~/.venv/yolo/bin/activate
 ### Packages
 
 ```bash
-pip install gradio ultralytics -y
+pip install gradio ultralytics
 pip install torch --index-url https://download.pytorch.org/whl/cu118
 ```
 
