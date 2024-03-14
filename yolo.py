@@ -5,7 +5,7 @@ from ultralytics import YOLO
 def predict(model_name, image):
     model = YOLO(model_name)
     results = model.predict(image)
-    show_boxes = model_name == 'yolov8n.pt'
+    show_boxes = '-seg' not in model_name
 
     for r in results:
         image_array = r.plot(boxes=show_boxes)
@@ -21,6 +21,7 @@ demo = gr.Interface(
         gr.Dropdown(
             choices=[
                 ('Detection', 'yolov8n.pt'),
+                ('Orientation', 'yolov8n-obb.pt'),
                 ('Segmentation', 'yolov8n-seg.pt'),
             ],
             label='Model',
