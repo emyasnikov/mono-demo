@@ -14,6 +14,7 @@ def predict(image):
 
 demo = gr.Interface(
     allow_flagging=False,
+    css='footer {visibility: hidden}',
     fn=predict,
     inputs=gr.Image(type='pil', label='Input Image'),
     outputs=gr.Image(type='pil', label='Output Image'),
