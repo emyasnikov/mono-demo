@@ -8,7 +8,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 def predict(model_name, image):
     model = YOLO(model_name).to(device)
     results = model.predict(image)
-    show_boxes = '-seg' not in model_name
+    show_boxes = all(s not in model_name for s in ['pose', 'seg'])
 
     for r in results:
         image_array = r.plot(boxes=show_boxes)
@@ -25,6 +25,7 @@ demo = gr.Interface(
             choices=[
                 ('Detection', 'yolov8n.pt'),
                 ('Orientation', 'yolov8n-obb.pt'),
+                ('Pose', 'yolov8n-pose.pt'),
                 ('Segmentation', 'yolov8n-seg.pt'),
             ],
             label='Model',
