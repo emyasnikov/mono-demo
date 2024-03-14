@@ -1,9 +1,12 @@
 import gradio as gr
+import torch
 from PIL import Image
 from ultralytics import YOLO
 
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
 def predict(model_name, image):
-    model = YOLO(model_name)
+    model = YOLO(model_name).to(device)
     results = model.predict(image)
     show_boxes = '-seg' not in model_name
 
