@@ -5,9 +5,10 @@ from ultralytics import YOLO
 def predict(model_name, image):
     model = YOLO(model_name)
     results = model.predict(image)
+    show_boxes = model_name == 'yolov8n.pt'
 
     for r in results:
-        image_array = r.plot()
+        image_array = r.plot(boxes=show_boxes)
         pil_image = Image.fromarray(image_array[..., ::-1])
 
     return pil_image
