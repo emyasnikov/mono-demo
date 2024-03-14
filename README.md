@@ -37,3 +37,11 @@ sudo systemctl restart nginx
 ```bash
 tmux new -s yolo
 ```
+
+### Run
+
+```bash
+tmux attach -t yolo
+source ~/.venv/yolo/bin/activate
+python yolo.py
+```
