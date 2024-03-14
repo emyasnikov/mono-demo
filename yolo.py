@@ -13,6 +13,7 @@ def predict(image):
     return pil_image
 
 demo = gr.Interface(
+    allow_flagging=False,
     fn=predict,
     inputs=gr.Image(type='pil', label='Input Image'),
     outputs=gr.Image(type='pil', label='Output Image'),
