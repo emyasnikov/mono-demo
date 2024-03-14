@@ -5,10 +5,9 @@ from ultralytics import YOLO
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-def predict(model_name, image):
+def predict(model_name, image, show_boxes):
     model = YOLO(model_name).to(device)
     results = model.predict(image)
-    show_boxes = all(s not in model_name for s in ['pose', 'seg'])
 
     for r in results:
         image_array = r.plot(boxes=show_boxes)
@@ -20,10 +19,10 @@ demo = gr.Interface(
     allow_flagging=False,
     css='footer {visibility: hidden}',
     examples=[
-        ['yolov8n.pt', 'data/detection.jpg'],
-        ['yolov8n-obb.pt', 'data/orientation.jpg'],
-        ['yolov8n-pose.pt', 'data/pose.jpg'],
-        ['yolov8n-seg.pt', 'data/segmentation.jpg'],
+        ['yolov8n.pt', 'data/detection.jpg', True],
+        ['yolov8n-obb.pt', 'data/orientation.jpg', True],
+        ['yolov8n-pose.pt', 'data/pose.jpg', False],
+        ['yolov8n-seg.pt', 'data/segmentation.jpg', False],
     ],
     fn=predict,
     inputs=[
@@ -38,6 +37,7 @@ demo = gr.Interface(
             value='yolov8n.pt',
         ),
         gr.Image(type='pil', label='Input Image'),
+        gr.Checkbox(label='Show Boxes', value=True),
     ],
     outputs=gr.Image(type='pil', label='Output Image'),
 )
