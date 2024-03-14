@@ -2,8 +2,8 @@ import gradio as gr
 from PIL import Image
 from ultralytics import YOLO
 
-def predict(image):
-    model = YOLO('yolov8n.pt')
+def predict(model_name, image):
+    model = YOLO(model_name)
     results = model.predict(image)
 
     for r in results:
@@ -16,7 +16,16 @@ demo = gr.Interface(
     allow_flagging=False,
     css='footer {visibility: hidden}',
     fn=predict,
-    inputs=gr.Image(type='pil', label='Input Image'),
+    inputs=[
+        gr.Dropdown(
+            choices=[
+                ('Detection', 'yolov8n.pt'),
+            ],
+            label='Model',
+            value='yolov8n.pt',
+        ),
+        gr.Image(type='pil', label='Input Image'),
+    ],
     outputs=gr.Image(type='pil', label='Output Image'),
 )
 
