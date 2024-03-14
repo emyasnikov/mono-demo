@@ -19,6 +19,12 @@ def predict(model_name, image):
 demo = gr.Interface(
     allow_flagging=False,
     css='footer {visibility: hidden}',
+    examples=[
+        ['yolov8n.pt', 'data/detection.jpg'],
+        ['yolov8n-obb.pt', 'data/orientation.jpg'],
+        ['yolov8n-pose.pt', 'data/pose.jpg'],
+        ['yolov8n-seg.pt', 'data/segmentation.jpg'],
+    ],
     fn=predict,
     inputs=[
         gr.Dropdown(
