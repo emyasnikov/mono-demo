@@ -10,3 +10,9 @@ Based on [Create your own chatbot with Llama2, Ollama and Gradio](https://bibek-
 sudo apt update
 sudo apt install curl
 ```
+
+### Ollama
+
+```bash
+curl https://ollama.ai/install.sh | sh
+```
