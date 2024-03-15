@@ -24,3 +24,14 @@ curl https://ollama.ai/install.sh | sh
 ```bash
 ollama run phi
 ```
+
+### API
+
+Test the API with `curl`:
+
+```bash
+curl http://localhost::11434/api/generate -d '{
+  "model": "phi",
+  "prompt": "What is AI?"
+}'
+```
