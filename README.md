@@ -16,3 +16,11 @@ sudo apt install curl
 ```bash
 curl https://ollama.ai/install.sh | sh
 ```
+
+## Run
+
+### CLI
+
+```bash
+ollama run phi
+```
