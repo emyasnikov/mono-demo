@@ -43,4 +43,4 @@ demo = gr.Interface(
 )
 
 if __name__ == '__main__':
-    demo.queue().launch()
+    demo.queue().launch(root_path='/yolo')
