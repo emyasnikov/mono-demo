@@ -2,10 +2,13 @@ import gradio as gr
 import json
 import requests
 
-def chatbot(prompt):
+context = []
+
+def generate(prompt, context):
     r = requests.post(
         'http://127.0.0.1:11434/api/generate',
         json={
+            'context': context,
             'model': 'phi',
             'prompt': prompt,
         },
@@ -26,7 +29,18 @@ def chatbot(prompt):
         response += part
 
         if body.get('done', False):
-            return response
+            return response, context
+
+def chatbot(prompt):
+    global context
+
+    history = []
+    output, context = generate(prompt, context)
+
+    history.append((input, output))
+
+    return history, history
+
 
 demo = gr.Interface(
     fn=chatbot,
