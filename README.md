@@ -8,7 +8,7 @@ Based on [Create your own chatbot with Llama2, Ollama and Gradio](https://bibek-
 
 ```bash
 sudo apt update
-sudo apt install curl python3-pip -y
+sudo apt install curl python3-{pip,venv} -y
 ```
 
 ### Ollama
@@ -21,6 +21,14 @@ curl https://ollama.ai/install.sh | sh
 
 ```bash
 pip install gradio
+```
+
+### Environment
+
+```bash
+mkdir ~/.venv
+python3 -m venv ~/.venv/chat
+source ~/.venv/chat/bin/activate
 ```
 
 ## Run
