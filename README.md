@@ -1,14 +1,12 @@
 # Chat Demo
 
-Based on [Create your own chatbot with Llama2, Ollama and Gradio](https://bibek-poudel.medium.com/create-your-own-chatbot-with-llama2-ollama-and-gradio-5c60ecb1aad0)
-
 ## Installation
 
 ### Ubuntu/Debian
 
 ```bash
 sudo apt update
-sudo apt install curl nginx python3-{pip,venv} -y
+sudo apt install curl nginx python3-{pip,venv} tmux -y
 ```
 
 ### Ollama
@@ -17,18 +15,18 @@ sudo apt install curl nginx python3-{pip,venv} -y
 curl https://ollama.ai/install.sh | sh
 ```
 
-### Packages
-
-```bash
-pip install gradio
-```
-
 ### Environment
 
 ```bash
 mkdir ~/.venv
 python3 -m venv ~/.venv/chat
 source ~/.venv/chat/bin/activate
+```
+
+### Packages
+
+```bash
+pip install gradio requests
 ```
 
 ### Nginx
@@ -64,4 +62,10 @@ If the API doesn't work, try to run the following command:
 ```bash
 sudo systemctl stop ollama
 tmux new -d -s ollama ollama serve
+```
+
+### Interface
+
+```bash
+tmux new -d -s chat ~/.venv/chat/bin/python chat.py
 ```
