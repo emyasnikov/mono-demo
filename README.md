@@ -35,3 +35,10 @@ curl http://localhost::11434/api/generate -d '{
   "prompt": "What is AI?"
 }'
 ```
+
+If the API doesn't work, try to run the following command:
+
+```bash
+sudo systemctl stop ollama
+tmux new -d -s ollama ollama serve
+```
