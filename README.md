@@ -8,7 +8,7 @@ Based on [Create your own chatbot with Llama2, Ollama and Gradio](https://bibek-
 
 ```bash
 sudo apt update
-sudo apt install curl python3-{pip,venv} -y
+sudo apt install curl nginx python3-{pip,venv} -y
 ```
 
 ### Ollama
@@ -29,6 +29,15 @@ pip install gradio
 mkdir ~/.venv
 python3 -m venv ~/.venv/chat
 source ~/.venv/chat/bin/activate
+```
+
+### Nginx
+
+```bash
+sudo cp chat.conf /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/chat.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
 ```
 
 ## Run
