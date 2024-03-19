@@ -35,16 +35,8 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl restart nginx
 ```
 
-### Tmux
-
-```bash
-tmux new -s demo
-```
-
 ## Run
 
 ```bash
-tmux attach -t demo
-source ~/.venv/demo/bin/activate
-python demo.py
+tmux new -d -s demo ~/.venv/demo/bin/python demo.py
 ```
