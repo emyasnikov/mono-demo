@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt update
-sudo apt install curl python3-venv
+sudo apt install curl python3-{pip,venv} -y
 ```
 
 ### Ollama
@@ -21,4 +21,10 @@ curl -fsSL https://ollama.ai/install.sh | sh
 mkdir ~/.venv
 python3 -m venv ~/.venv/llava
 source ~/.venv/llava/bin/activate
+```
+
+### Packages
+
+```bash
+pip install gradio ollama
 ```
