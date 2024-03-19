@@ -33,16 +33,8 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl restart nginx
 ```
 
-### Tmux
-
-```bash
-tmux new -s yolo
-```
-
 ### Run
 
 ```bash
-tmux attach -t yolo
-source ~/.venv/yolo/bin/activate
-python yolo.py
+tmux new -d -s yolo ~/.venv/yolo/bin/python yolo.py
 ```
