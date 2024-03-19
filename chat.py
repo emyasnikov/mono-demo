@@ -4,7 +4,7 @@ import requests
 
 context = []
 
-def generate(prompt, context):
+def generate(prompt, history):
     r = requests.post(
         'http://127.0.0.1:11434/api/generate',
         json={
@@ -29,24 +29,20 @@ def generate(prompt, context):
         response += part
 
         if body.get('done', False):
-            return response, context
+            history.append((prompt, response))
 
-def chatbot(prompt):
-    global context
+            return response, history
 
-    history = []
-    output, context = generate(prompt, context)
+with gr.Blocks() as demo:
+    chatbot = gr.Chatbot()
+    message = gr.Textbox(label="Prompt")
 
-    history.append((input, output))
+    with gr.Row():
+        clear = gr.ClearButton([message, chatbot])
+        submit = gr.Button(value="Send")
 
-    return history, history
-
-
-demo = gr.Interface(
-    fn=chatbot,
-    inputs=gr.Textbox(lines=5, label="Input"),
-    outputs=gr.Textbox(label="Output"),
-)
+    message.submit(generate, inputs=[message, chatbot], outputs=[chatbot, message])
+    submit.click(generate, inputs=[message, chatbot], outputs=[chatbot, message])
 
 if __name__ == '__main__':
     demo.launch()
