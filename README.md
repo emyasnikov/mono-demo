@@ -39,3 +39,9 @@ curl -fsSL https://ollama.ai/install.sh | sh
 sudo systemctl stop ollama
 tmux new -d -s ollama ollama serve
 ```
+
+## Run
+
+```bash
+tmux new -d -s llava ~/.venv/llava/bin/python llava.py
+```
