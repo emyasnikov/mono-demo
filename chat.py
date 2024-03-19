@@ -2,29 +2,28 @@ import gradio as gr
 import json
 import requests
 
-history = []
+context = []
 url = 'http://127.0.0.1:11434/api/generate'
 
 def generate(prompt):
-    history.append(prompt)
-    context = '\n'.join(history)
-    data = {
+    body = {
+        'context': context,
         'model': 'phi',
-        'prompt': context,
+        'prompt': prompt,
         'stream': False,
     }
 
-    response = requests.post(url, json=data)
+    response = requests.post(url, json=body)
 
     if response.status_code != 200:
         print('Error:', response.status_code, response.text)
 
         return None
 
-    text = json.loads(response.text)['response']
-    history.append(text)
+    data = json.loads(response.text)
+    context.extend(data['context'])
 
-    return text
+    return data['response']
 
 with gr.Blocks() as demo:
     chatbot = gr.Textbox(lines=10)
