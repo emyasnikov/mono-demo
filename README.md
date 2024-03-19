@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt update
-sudo apt install curl python3-{pip,venv} -y
+sudo apt install curl nginx python3-{pip,venv} -y
 ```
 
 ### Ollama
@@ -27,4 +27,13 @@ source ~/.venv/llava/bin/activate
 
 ```bash
 pip install gradio ollama
+```
+
+### Nginx
+
+```bash
+sudo cp llava.conf /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/llava.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
 ```
