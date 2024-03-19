@@ -35,4 +35,4 @@ with gr.Blocks() as demo:
     message.submit(generate, inputs=message, outputs=chatbot)
 
 if __name__ == '__main__':
-    demo.launch()
+    demo.queue().launch()
