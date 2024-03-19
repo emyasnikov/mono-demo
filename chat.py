@@ -9,9 +9,8 @@ def generate(prompt):
     history.append(prompt)
     context = '\n'.join(history)
     data = {
-        'context': context,
         'model': 'phi',
-        'prompt': prompt,
+        'prompt': context,
         'stream': False,
     }
 
