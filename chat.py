@@ -2,47 +2,39 @@ import gradio as gr
 import json
 import requests
 
-context = []
+history = []
+url = 'http://127.0.0.1:11434/api/generate'
 
-def generate(prompt, history):
-    r = requests.post(
-        'http://127.0.0.1:11434/api/generate',
-        json={
-            'context': context,
-            'model': 'phi',
-            'prompt': prompt,
-        },
-        stream=False
-    )
+def generate(prompt):
+    history.append(prompt)
+    context = '\n'.join(history)
+    data = {
+        'context': context,
+        'model': 'phi',
+        'prompt': prompt,
+        'stream': False,
+    }
 
-    r.raise_for_status()
+    response = requests.post(url, json=data)
 
-    response = ''
+    if response.status_code != 200:
+        print('Error:', response.status_code, response.text)
 
-    for line in r.iter_lines():
-        body = json.loads(line)
-        part = body.get('response', '')
+        return None
 
-        if 'error' in body:
-            raise Exception(body['error'])
+    text = json.loads(response.text)['response']
+    history.append(text)
 
-        response += part
-
-        if body.get('done', False):
-            history.append((prompt, response))
-
-            return response, history
+    return text
 
 with gr.Blocks() as demo:
-    chatbot = gr.Chatbot()
+    chatbot = gr.Textbox(lines=10)
     message = gr.Textbox(label="Prompt")
 
     with gr.Row():
         clear = gr.ClearButton([message, chatbot])
-        submit = gr.Button(value="Send")
 
-    message.submit(generate, inputs=[message, chatbot], outputs=[chatbot, message])
-    submit.click(generate, inputs=[message, chatbot], outputs=[chatbot, message])
+    message.submit(generate, inputs=message, outputs=chatbot)
 
 if __name__ == '__main__':
     demo.launch()
