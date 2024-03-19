@@ -1,38 +1,36 @@
 import gradio as gr
-import json
-import requests
+import ollama
 
-context = []
-url = 'http://127.0.0.1:11434/api/generate'
+def append(prompt, history):
+    chat = []
 
-def generate(prompt):
-    body = {
-        'context': context,
-        'model': 'phi',
-        'prompt': prompt,
-        'stream': False,
-    }
+    for query, response in history:
+        chat.append({'role': 'user', 'content': query})
+        chat.append({'role': 'assistant', 'content': response})
 
-    response = requests.post(url, json=body)
+    chat.append({'role': 'user', 'content': prompt})
 
-    if response.status_code != 200:
-        print('Error:', response.status_code, response.text)
+    return chat
 
-        return None
+def generate(prompt, history):
+    chat = append(prompt, history)
+    message = ''
+    response = ollama.chat(model='phi', stream=True, messages=chat)
 
-    data = json.loads(response.text)
-    context.extend(data['context'])
+    for part in response:
+        token = part['message']['content']
+        message += token
 
-    return data['response']
+        yield message
 
-with gr.Blocks() as demo:
-    chatbot = gr.Textbox(lines=10)
-    message = gr.Textbox(label="Prompt")
-
-    with gr.Row():
-        clear = gr.ClearButton([message, chatbot])
-
-    message.submit(generate, inputs=message, outputs=chatbot)
+demo = gr.ChatInterface(
+    clear_btn='Clear',
+    fn=generate,
+    retry_btn='Retry',
+    submit_btn='Send',
+    title='Chat',
+    undo_btn='Undo',
+)
 
 if __name__ == '__main__':
     demo.queue().launch(root_path='/chat')

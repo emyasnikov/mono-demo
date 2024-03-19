@@ -12,7 +12,7 @@ sudo apt install curl nginx python3-{pip,venv} tmux -y
 ### Ollama
 
 ```bash
-curl https://ollama.ai/install.sh | sh
+curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
 ### Environment
@@ -26,7 +26,7 @@ source ~/.venv/chat/bin/activate
 ### Packages
 
 ```bash
-pip install gradio requests
+pip install gradio ollama
 ```
 
 ### Nginx
