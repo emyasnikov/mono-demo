@@ -25,6 +25,7 @@ def generate(prompt, history):
 
 demo = gr.ChatInterface(
     clear_btn='Clear',
+    css='footer {visibility: hidden}',
     fn=generate,
     retry_btn='Retry',
     submit_btn='Send',
