@@ -16,3 +16,10 @@ mkdir ~/.venv
 python3 -m venv ~/.venv/sd
 source ~/.venv/sd/bin/activate
 ```
+
+### Packages
+
+```bash
+pip install accelerate diffusers transformers
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
