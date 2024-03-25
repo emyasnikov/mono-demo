@@ -12,6 +12,7 @@ def generate(prompt):
 
 demo = gr.Interface(
     allow_flagging=False,
+    css='footer {visibility: hidden}',
     fn=generate,
     inputs=gr.Textbox(lines=8, label="Input Text"),
     outputs=gr.Image(label="Output Image"),
