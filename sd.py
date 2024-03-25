@@ -11,6 +11,7 @@ def generate(prompt):
     return image
 
 demo = gr.Interface(
+    allow_flagging=False,
     fn=generate,
     inputs=gr.Textbox(lines=8, label="Input Text"),
     outputs=gr.Image(label="Output Image"),
