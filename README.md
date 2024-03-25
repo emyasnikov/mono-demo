@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt update
-sudo apt install nginx python3-{pip,venv} -y
+sudo apt install nginx python3-{pip,venv} tmux -y
 ```
 
 ### Environment
@@ -36,5 +36,5 @@ sudo systemctl restart nginx
 ## Run
 
 ```bash
-~/.venv/sd/bin/python sd.py
+tmux new -d -s sd ~/.venv/sd/bin/python sd.py
 ```
