@@ -4,8 +4,8 @@ from diffusers import DiffusionPipeline
 
 dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
-def generate(prompt):
-    pipeline = DiffusionPipeline.from_pretrained('segmind/small-sd', torch_dtype=dtype)
+def generate(model, prompt):
+    pipeline = DiffusionPipeline.from_pretrained(model, torch_dtype=dtype)
     image = pipeline(prompt).images[0]
 
     return image
@@ -14,7 +14,17 @@ demo = gr.Interface(
     allow_flagging=False,
     css='footer {visibility: hidden}',
     fn=generate,
-    inputs=gr.Textbox(lines=8, label="Input Text"),
+    inputs=[
+        gr.Dropdown(
+            choices=[
+                ('Small', 'segmind/small-sd'),
+                ('Tiny', 'segmind/tiny-sd'),
+            ],
+            label='Model',
+            value='segmind/small-sd',
+        ),
+        gr.Textbox(lines=4, label="Input Text"),
+    ],
     outputs=gr.Image(label="Output Image"),
     title='Stable Diffusion Demo',
 )
