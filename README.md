@@ -20,7 +20,7 @@ source ~/.venv/sd/bin/activate
 ### Packages
 
 ```bash
-pip install accelerate diffusers transformers
+pip install accelerate diffusers gradio transformers
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
 
