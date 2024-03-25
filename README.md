@@ -21,7 +21,7 @@ source ~/.venv/yolo/bin/activate
 
 ```bash
 pip install gradio ultralytics
-pip install torch --index-url https://download.pytorch.org/whl/cu118
+pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
 
 ### Nginx
