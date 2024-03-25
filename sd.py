@@ -16,6 +16,7 @@ demo = gr.Interface(
     fn=generate,
     inputs=gr.Textbox(lines=8, label="Input Text"),
     outputs=gr.Image(label="Output Image"),
+    title='Stable Diffusion Demo',
 )
 
 if __name__ == '__main__':
