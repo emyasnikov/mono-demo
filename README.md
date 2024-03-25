@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt update
-sudo apt install python3-venv
+sudo apt install nginx python3-{pip,venv} -y
 ```
 
 ### Environment
@@ -22,6 +22,15 @@ source ~/.venv/sd/bin/activate
 ```bash
 pip install accelerate diffusers gradio transformers
 pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+### Nginx
+
+```bash
+sudo cp sd.conf /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/sd.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
 ```
 
 ## Run
