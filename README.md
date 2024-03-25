@@ -23,3 +23,9 @@ source ~/.venv/sd/bin/activate
 pip install accelerate diffusers transformers
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
+
+## Run
+
+```bash
+~/.venv/sd/bin/python sd.py
+```
