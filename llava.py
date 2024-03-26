@@ -15,7 +15,8 @@ def append(prompt, history):
 def generate(prompt, history):
     chat = append(prompt, history)
     message = ''
-    response = ollama.chat(model='llava:7b-v1.6-mistral-q4_0', stream=True, messages=chat)
+    model='llava:7b-v1.6-mistral-q4_0'
+    response = ollama.chat(model=model, stream=True, messages=chat)
 
     for part in response:
         token = part['message']['content']
