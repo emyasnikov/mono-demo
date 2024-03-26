@@ -3,7 +3,10 @@ import ollama
 
 def generate(prompt):
     message = ''
-    response = ollama.chat(model='llava', stream=True, messages=[prompt])
+    response = ollama.chat(model='llava', stream=True, messages=[{
+        'content': prompt,
+        'role': 'user',
+    }])
 
     for part in response:
         token = part['message']['content']
