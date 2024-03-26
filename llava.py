@@ -3,7 +3,7 @@ import ollama
 
 def generate(prompt):
     message = ''
-    response = ollama.chat(model='llava', stream=True, messages=[{
+    response = ollama.chat(model='llava:7b-v1.6-mistral-q4_0', stream=True, messages=[{
         'content': prompt,
         'role': 'user',
     }])
