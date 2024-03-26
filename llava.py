@@ -12,7 +12,7 @@ def append(prompt, history):
 
     return chat
 
-def generate(prompt, history):
+def generate(prompt, history, image):
     chat = append(prompt, history)
     message = ''
     model='llava:7b-v1.6-mistral-q4_0'
@@ -24,9 +24,15 @@ def generate(prompt, history):
 
         yield message
 
-demo = gr.ChatInterface(
-    generate,
-)
+with gr.Blocks() as demo:
+    with gr.Row():
+        image = gr.Image(label='Image', type='pil')
+
+        with gr.Column():
+            gr.ChatInterface(
+                additional_inputs=[image],
+                fn=generate,
+            )
 
 if __name__ == '__main__':
     demo.launch()
