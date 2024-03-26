@@ -1,22 +1,31 @@
 import gradio as gr
 import ollama
 
-def generate(prompt):
-    chat = [{'role': 'user', 'content': prompt}]
+def append(prompt, history):
+    chat = []
+
+    for query, response in history:
+        chat.append({'role': 'user', 'content': query})
+        chat.append({'role': 'assistant', 'content': response})
+
+    chat.append({'role': 'user', 'content': prompt})
+
+    return chat
+
+def generate(prompt, history):
+    chat = append(prompt, history)
+    message = ''
     model='llava:7b-v1.6-mistral-q4_0'
-    output = [(prompt)]
-    response = ollama.chat(model=model, stream=False, messages=chat)
+    response = ollama.chat(model=model, stream=True, messages=chat)
 
     for part in response:
         token = part['message']['content']
-        output.append((token))
+        message += token
 
-        return output
+        yield message
 
-demo = gr.Interface(
-    fn=generate,
-    inputs=gr.Textbox(label='Prompt'),
-    outputs=gr.Textbox(label='Output'),
+demo = gr.ChatInterface(
+    generate,
 )
 
 if __name__ == '__main__':
