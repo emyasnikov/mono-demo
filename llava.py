@@ -1,7 +1,15 @@
 import gradio as gr
+import ollama
 
-def generate(prompt, history):
-    return prompt
+def generate(prompt):
+    message = ''
+    response = ollama.chat(model='llava', stream=True, messages=[prompt])
+
+    for part in response:
+        token = part['message']['content']
+        message += token
+
+        yield message
 
 demo = gr.Interface(
     fn=generate,
