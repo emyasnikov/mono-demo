@@ -3,15 +3,15 @@ import ollama
 
 def generate(prompt):
     chat = [{'role': 'user', 'content': prompt}]
-    message = ''
     model='llava:7b-v1.6-mistral-q4_0'
+    output = [('user', prompt)]
     response = ollama.chat(model=model, stream=True, messages=chat)
 
     for part in response:
         token = part['message']['content']
-        message += token
+        output.append(('assistant', token))
 
-        yield message
+        yield output
 
 demo = gr.Interface(
     fn=generate,
