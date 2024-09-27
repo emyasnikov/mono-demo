@@ -3,19 +3,17 @@ import ollama
 
 
 def generate():
-    model="llama3.1:8b-jokes"
+    model="llama3.1:latest-jokes"
 
-    for result in ollama.generate(model, "", stream=False):
-        return result
+    return ollama.generate(model, "Erzähle ein Witz", stream=False)["response"]
 
 
-demo = gr.Interface(
-    title="Witzegenerator",
-    fn=generate,
-    inputs=gr.Button("Generieren"),
-    outputs=gr.Textbox(label="Output", lines=10),
-)
+with gr.Blocks() as demo:
+    with gr.Column():
+        output = gr.Textbox(interactive=False, label="Output", lines=10)
+        button = gr.Button(value="Generate")
 
+    button.click(fn=generate, inputs=[], outputs=output)
 
 if __name__ == "__main__":
-    demo.queue().launch(root_path="/witze")
+    demo.queue().launch(root_path="/witze/")
